@@ -1,3 +1,5 @@
+// https://github.com/rootVIII/searchable_bootstrap_table
+
 function main() {
     const tableData = [
         ['1', '1', 'Pilot', 'September 10, 1993'],
