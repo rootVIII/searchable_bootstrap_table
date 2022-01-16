@@ -1,8 +1,36 @@
 // https://github.com/rootVIII/searchable_bootstrap_table
 
-function main() {
+// noinspection JSValidateTypes
+class SearchableTable {
+    constructor(tableData) {
+        this.tableData = tableData;
+        this.tableBody = document.getElementById('tableBody');
+    }
+
+    loadTableData() {
+        return new Promise((resolve) => {
+            let tableRows = '';
+            for (let row of this.tableData) {
+                let [episode, season, title, airDate, loneGunmen] = row;
+                tableRows += `<tr><th scope="row">${episode}</th><td>${season}</td>
+                    <td>${title}</td><td>${airDate}</td><td>${loneGunmen}</td></tr>`;
+            }
+            resolve(tableRows);
+        });
+    }
+
+    init_table() {
+        this.loadTableData().then((tableRows) => {
+            this.tableBody.innerHTML = tableRows;
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+}
+
+function getTableData() {
     // simulate fetching table data from the back-end:
-    const tableData = [
+    return [
         ['1', 's1', 'Pilot', 'September 10, 1993', 'no'],
         ['2', 's1', 'Deep Throat', 'September 17, 1993', 'no'],
         ['3', 's1', 'Squeeze', 'September 24, 1993', 'no'],
@@ -222,6 +250,13 @@ function main() {
         ['217', 's11', 'Nothing Lasts Forever', 'March 14, 2018', 'no'],
         ['218', 's11', 'My Struggle IV', 'March 21, 2018', 'no'],
     ];
+}
+
+function main() {
+    window.addEventListener('load', () => {
+        const st = new SearchableTable(getTableData());
+        st.init_table();
+    });
 }
 
 main();
