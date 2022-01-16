@@ -19,8 +19,8 @@ class SearchableTable {
                         <th class="col-1">${episode}</th>
                         <td class="col-1">${season}</td>
                         <td class="col-5">${title}</td>
-                        <td class="col-4">${airDate}</td>
-                        <td class="col-1">${loneGunmen}</td></tr>`;
+                        <td class="col-3">${airDate}</td>
+                        <td class="col-2">${loneGunmen}</td></tr>`;
                 }
             }
             resolve(tableRows);
