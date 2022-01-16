@@ -9,20 +9,18 @@ class SearchableTable {
         document.addEventListener('keyup', this.updateTable.bind(this), false);
     }
 
-    loadTableData() {
+    loadTableData(searchText = null) {
         return new Promise((resolve) => {
             let tableRows = '';
             for (let row of this.tableData) {
-                let [episode, season, title, airDate, loneGunmen] = row;
-                tableRows += `<tr><th scope="row">${episode}</th><td>${season}</td>
+                if (!(searchText) || row.join(' ').includes(searchText)) {
+                    let [episode, season, title, airDate, loneGunmen] = row;
+                    tableRows += `<tr><th scope="row">${episode}</th><td>${season}</td>
                     <td>${title}</td><td>${airDate}</td><td>${loneGunmen}</td></tr>`;
+                }
             }
             resolve(tableRows);
         });
-    }
-
-    updateTable() {
-        console.log(this.searchBox.value.trim());
     }
 
     init_table() {
@@ -31,6 +29,19 @@ class SearchableTable {
         }).catch((err) => {
             console.log(err);
         });
+    }
+
+    updateTable() {
+        const inputText = this.searchBox.value.trim();
+        if (!(inputText.length)) {
+            this.init_table();
+        } else {
+            this.loadTableData(inputText).then((tableRows) => {
+                this.tableBody.innerHTML = tableRows;
+            }).catch((err) => {
+                console.log(err);
+            });
+        }
     }
 }
 
