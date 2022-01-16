@@ -22,9 +22,7 @@ class SearchableTable {
     }
 
     updateTable() {
-        if (this.searchBox) {
-            console.log('have searchbox');
-        }
+        console.log(this.searchBox.value.trim());
     }
 
     init_table() {
