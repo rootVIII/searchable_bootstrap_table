@@ -15,8 +15,12 @@ class SearchableTable {
             for (let row of this.tableData) {
                 if (!(searchText) || row.join(' ').includes(searchText)) {
                     let [episode, season, title, airDate, loneGunmen] = row;
-                    tableRows += `<tr><th scope="row">${episode}</th><td>${season}</td>
-                    <td>${title}</td><td>${airDate}</td><td>${loneGunmen}</td></tr>`;
+                    tableRows += `<tr class="d-flex">
+                        <th class="col-1">${episode}</th>
+                        <td class="col-1">${season}</td>
+                        <td class="col-5">${title}</td>
+                        <td class="col-4">${airDate}</td>
+                        <td class="col-1">${loneGunmen}</td></tr>`;
                 }
             }
             resolve(tableRows);
