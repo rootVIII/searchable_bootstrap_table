@@ -5,6 +5,8 @@ class SearchableTable {
     constructor(tableData) {
         this.tableData = tableData;
         this.tableBody = document.getElementById('tableBody');
+        this.searchBox = document.getElementById('searchBox');
+        document.addEventListener('keyup', this.updateTable.bind(this), false);
     }
 
     loadTableData() {
@@ -17,6 +19,12 @@ class SearchableTable {
             }
             resolve(tableRows);
         });
+    }
+
+    updateTable() {
+        if (this.searchBox) {
+            console.log('have searchbox');
+        }
     }
 
     init_table() {
@@ -253,9 +261,11 @@ function getTableData() {
 }
 
 function main() {
-    window.addEventListener('load', () => {
-        const st = new SearchableTable(getTableData());
-        st.init_table();
+    let searchableTable;
+
+    document.addEventListener('DOMContentLoaded', () => {
+        searchableTable = new SearchableTable(getTableData());
+        searchableTable.init_table();
     });
 }
 
